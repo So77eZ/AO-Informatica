@@ -1,0 +1,10 @@
+Cars info
+
+"id"	"mark"	"model"	"generation"	"restyling"	"colour"
+1	"BMW"	"M3"	4	false	"black"
+2	"Mazda"	"RX-8"	1	false	"purple"
+3	"Toyota"	"Supra"	4	true	"blue"
+4	"Toyota"	"Supra"	5	false	"blue"
+5	"BMW"	"M3"	3	true	"red"
+6	"Toyota"	"Cresta"	5	true	"white"
+7	"BMW"	"M3"	4	false	"white"

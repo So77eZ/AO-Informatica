@@ -1,0 +1,43 @@
+1. Вывести все машины всех пользователей, которым больше 23 лет
+
+SELECT *
+FROM man m
+INNER JOIN man_car mc ON m.id=mc.man_id
+INNER JOIN car c ON c.id=mc.car_id
+WHERE EXTRACT(year FROM age(current_date,birth_date)) :: int > 23;
+
+
+2. Вывести колличество машин для каждого гендера и марки.
+
+SELECT m.gender,c.mark,COUNT(*)
+FROM man m
+INNER JOIN man_car mc ON m.id=mc.man_id
+INNER JOIN car c ON c.id=mc.car_id
+GROUP BY m.gender,c.mark;
+
+3. Вывести всех пользователей имеющих черную\белую машину
+
+SELECT m.*
+FROM man m
+INNER JOIN man_car mc ON m.id=mc.man_id
+INNER JOIN car c ON c.id=mc.car_id
+WHERE c.colour IN ('black','white');
+
+4. Вывести всех пользователей не имеющих машину
+
+SELECT *
+FROM man m
+LEFT JOIN man_car mc ON m.id=mc.man_id
+WHERE mc.id is null;
+
+5. Вывести имена пользователей, имеющих более 1 машины
+
+SELECT m.name,COUNT(*)
+FROM man m
+INNER JOIN man_car mc ON m.id=mc.man_id
+GROUP BY m.name
+HAVING count(m.name) > 1;
+
+
+
+ЗАНЯЛО С 17 40 - 20 10;
