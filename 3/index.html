@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sneetch</title>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+
+
+    <h1 align="center">Погода в</h1>
+    <h2 align="center" id="location"></h2>
+    <div>
+        <span>Температура на улице<p id="temperature">Температура</p></span>
+        <span>Ощущается как<p id="feels_like">Ощущается как</p></span>
+        <span>Давление составляет<p id="pressure">Давление</p></span>
+        <span>Скорость ветра<p id="windSpeed">Скорость ветра</p></span>
+        <span>Рассвет начинается в<p id="sunrise">Рассвет</p></span>
+        <span>Закат начинается в <p id="sunset">Закат</p></span>
+        <span>На улице <p id="description">Погода</p></span>
+        <p id="weather">Погода</p>
+    </div>
+    <label> Имя города:
+        <input id="city-name" value="Ivanovo">
+        <button onClick=fetchWeather()>Ok</button>
+    </label>
+    <select id="select" onchange=changeInputValue()>
+        <option value="Ivanovo">Иваново</option>
+        <option value="Moscow">Москва</option>
+        <option value="Samara">Самара</option>
+    </select>
+</body>
+
+</html>
