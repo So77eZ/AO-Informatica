@@ -2,6 +2,7 @@ const changeInputValue = () => {
     document.getElementById('city-name').value = document.getElementById('select').value;
 }
 
+
 const fetchWeather = () => {
     const city = document.getElementById('city-name').value;
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ad3df4030a233c298c8cf93b05395a7&lang=ru`;
