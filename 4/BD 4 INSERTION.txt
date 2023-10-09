@@ -1,0 +1,61 @@
+warehouse_product
+
+INSERT INTO public.warehouse_product (warehouse_from_id, product_id, quantity, warehouse_to_id, date)
+VALUES
+    (NULL, 1, random() * 100, 1, NOW() - INTERVAL '1 day'),
+    (1, 2, random() * 100, 2, NOW() - INTERVAL '2 days'),
+    (2, 3, random() * 100, 3, NOW() - INTERVAL '3 days'),
+    (3, 4, random() * 100, 1, NOW() - INTERVAL '4 days'),
+    (NULL, 5, random() * 100, 2, NOW() - INTERVAL '5 days'),
+    (1, 6, random() * 100, 3, NOW() - INTERVAL '6 days'),
+    (2, 7, random() * 100, 1, NOW() - INTERVAL '7 days'),
+    (3, 8, random() * 100, 2, NOW() - INTERVAL '8 days'),
+    (NULL, 9, random() * 100, 3, NOW() - INTERVAL '9 days'),
+    (1, 10, random() * 100, 1, NOW() - INTERVAL '10 days'),
+    (2, 11, random() * 100, 2, NOW() - INTERVAL '11 days'),
+    (3, 12, random() * 100, 3, NOW() - INTERVAL '12 days'),
+    (NULL, 13, random() * 100, 1, NOW() - INTERVAL '13 days'),
+    (1, 14, random() * 100, 2, NOW() - INTERVAL '14 days'),
+    (2, 15, random() * 100, 3, NOW() - INTERVAL '15 days'),
+    (3, 16, random() * 100, 1, NOW() - INTERVAL '16 days'),
+    (NULL, 17, random() * 100, 2, NOW() - INTERVAL '17 days'),
+    (1, 18, random() * 100, 3, NOW() - INTERVAL '18 days'),
+    (2, 19, random() * 100, 1, NOW() - INTERVAL '19 days'),
+    (3, 20, random() * 100, 2, NOW() - INTERVAL '20 days');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+product
+
+INSERT INTO public.product (name, unit, pack_type)
+VALUES 
+('Процессор', 'палеты', 'мягкая'),
+('Видеокарта', 'бочки', 'твердая'),
+('Жесткий диск', 'килограммы', 'мягкая'),
+('Оперативная память', 'контейнеры', 'твердая'),
+('Материнская плата', 'палеты', 'OEM'),
+('Блок питания', 'бочки', 'мягкая'),
+('Клавиатура', 'килограммы', 'твердая'),
+('Мышь', 'контейнеры', 'OEM'),
+('Сетевая карта', 'палеты', 'мягкая'),
+('Звуковая карта', 'бочки', 'твердая'),
+('Оптический привод', 'килограммы', 'мягкая'),
+('Вентилятор', 'контейнеры', 'OEM'),
+('Биос', 'палеты', 'мягкая'),
+('Кабели', 'бочки', 'твердая'),
+('Слоты расширения', 'килограммы', 'мягкая'),
+('Система охлаждения', 'контейнеры', 'твердая'),
+('Монитор', 'палеты', 'OEM'),
+('Системная плата', 'бочки', 'мягкая'),
+('Батарейка BIOS', 'килограммы', 'твердая'),
+('Корпус', 'контейнеры', 'OEM');
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+warehouse
+
+INSERT INTO public.warehouse (address,special_machines, square)
+VALUES 
+('ул. Ленина, 123, Иваново', false, 4500),
+('пр. Гагарина, 56, Иваново', true, 15000),
+('ул. Пушкина, 789, Иваново', true, 28000);

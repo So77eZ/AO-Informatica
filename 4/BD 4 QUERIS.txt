@@ -1,0 +1,58 @@
+Перемещаем всё с 3его склада, тем самым опустошаем его.
+
+INSERT INTO public.warehouse_product (warehouse_from_id, product_id, quantity, warehouse_to_id, date)
+VALUES
+    (3, 3, 59.408283, 1, NOW()),
+    (3, 6, 39.191936, 2, NOW()),
+    (3, 9, 10.321128, 2, NOW()),
+    (3, 12, 36.211666, 1, NOW()),
+    (3, 15, 24.310358, 2, NOW()),
+    (3, 18, 17.691576, 2, NOW());
+
+
+
+
+•	отчет о складах, пустующих за определенный период времени, со всей информацией по складу. Смотрим, какой склад у нас является пустым
+
+with warehouse_ids as (select distinct id from warehouse),
+     history as (select *
+                 from warehouse_ids wi
+                        left join warehouse_product wp on wi.id = wp.warehouse_to_id or wi.id = wp.warehouse_from_id
+                 where date <= '2023-10-09 00:00:00.000000'),
+     history_with_operation as (select case when warehouse_to_id = id then '+' else '-' end as operation, *
+                                from history),
+     totally as (select id as warehouse_id, product_id, operation, sum(quantity) as sum
+                 from history_with_operation
+                 group by id, product_id, operation)
+select warehouse_id, product_id, sum(case when operation = '+' then sum else sum * -1 end) as quantity
+from totally
+group by warehouse_id, product_id
+having sum(case when operation = '+' then sum else sum * -1 end) = 0;
+
+
+
+•	интенсивность использования.Далее создаем запрос для просмотрра наиболее используемого склада как для погрузок, так и для отгрузок.
+
+SELECT w.id,w.address, COUNT(*)
+AS moves_count FROM warehouse w
+INNER JOIN warehouse_product wp ON w.id=wp.warehouse_to_id OR w.id=wp.warehouse_from_id
+GROUP BY w.id
+ORDER BY moves_count;
+
+
+
+•	история движение товара на складе за определенный период 
+
+SELECT p.name, p.id AS id_product, w.address AS departure_warehouse, w.address AS arrival_warehouse, wp.date
+FROM warehouse_product wp
+INNER JOIN product p ON wp.product_id=p.id
+INNER JOIN warehouse w ON wp.warehouse_from_id = w.id
+WHERE p.name ilike '%ж%';
+
+•	отчет о движении заданного товара по складам 
+
+SELECT p.id AS айди_товара, w.address AS departure_warehouse, w.address AS arrival_warehouse, wp.date
+FROM warehouse_product wp
+INNER JOIN product p ON wp.product_id=p.id
+INNER JOIN warehouse w ON wp.warehouse_from_id = w.id
+WHERE p.name = 'Блок питания';

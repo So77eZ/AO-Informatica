@@ -1,0 +1,39 @@
+Создание таблицы физически лиц
+
+CREATE TABLE IF NOT EXISTS public.individual
+(
+    id integer NOT NULL DEFAULT nextval('individual_id_seq'::regclass),
+    full_name character varying COLLATE pg_catalog."default" NOT NULL,
+    passport_number integer,
+    gender character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT individual_pkey PRIMARY KEY (id)
+);
+
+Создание таблицы места жительства
+
+CREATE TABLE IF NOT EXISTS public.residence_place
+(
+    id serial NOT NULL,
+    city character varying NOT NULL,
+    region character varying NOT NULL,
+    district character varying,
+    street character varying NOT NULL,
+    building character varying NOT NULL,
+    flat character varying NOT NULL,
+    postcode integer,
+    ifns_code integer,
+    okato_code integer,
+    PRIMARY KEY (id)
+);
+
+
+соединение таблиц
+
+ALTER TABLE IF EXISTS public.individual
+    ADD FOREIGN KEY (id)
+    REFERENCES public.residence_place (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+END;

@@ -1,0 +1,31 @@
+•	Дом, количество проживающих для домов с чётными номерами
+
+SELECT rp.building, COUNT(i.full_name) FROM residence_place rp
+LEFT JOIN individual i ON i.residence_id= rp.id
+WHERE (rp.building % 2) = 0
+GROUP BY rp.building;
+
+•	Фамилия, № дома, № Паспорта
+
+SELECT full_name, rp.building , i.passport_number
+FROM residence_place rp
+INNER JOIN individual i ON i.residence_id= rp.id
+
+
+
+•	Город, улица, № дома. В этот отчет надо вывести только пустующие дома.
+
+SELECT rp.city, rp.street, rp.building
+FROM residence_place rp
+LEFT JOIN individual i ON i.residence_id= rp.id
+WHERE i.id IS NULL;
+
+•	Почтовый индекс, Код ИФНС, Код ОКАТО города, района, края/области для заданного дома или квартиры. 
+
+
+SELECT rp.postcode,rp.ifns_code,rp.okato_code
+FROM residence_place rp
+WHERE  rp.city ='Шуя' AND rp.region='Ивановская_область'
+AND rp.district='Шуйский_район' AND rp.street = 'Свердлова'
+AND rp.building = 20;
+
